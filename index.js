@@ -15,36 +15,6 @@ const connection = new Connection(https, {
     commitment: "confirmed"
 })
 
-async function estimateTransactionFee(senderWallet, receiverPublicKey, lamports) {
-    // Establish connection to the Solana network
-    const connection = new Connection('https://api.mainnet-beta.solana.com');
-
-    try {
-        // Create a new transaction
-        const transaction = new Transaction().add(
-            SystemProgram.transfer({
-                fromPubkey: senderWallet.publicKey,
-                toPubkey: new PublicKey(receiverPublicKey),
-                lamports, // Amount to transfer
-            })
-        );
-
-        // Simulate the transaction to estimate fees
-        const { feeCalculator } = await connection.getRecentBlockhash();
-        const simulationResult = await connection.simulateTransaction(transaction, [senderWallet]);
-
-        // Calculate fee using feeCalculator and simulationResult
-        const lamportsPerSignature = feeCalculator.lamportsPerSignature;
-        const signatures = transaction.signatures.length;
-        const fee = lamportsPerSignature * signatures;
-
-        return fee;
-    } catch (error) {
-        console.error('Error estimating transaction fee:', error);
-        return null;
-    }
-}
-
 async function transferSol(senderWallet, recipientPublicKey) {
     // Decode the recipient's public key
     const recipientKey = new PublicKey(recipientPublicKey);
