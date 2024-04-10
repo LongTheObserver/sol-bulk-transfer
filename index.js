@@ -74,7 +74,7 @@ async function transferSol(senderWallet, recipientPublicKey) {
 
 const runAll = async (arr) => {
     for (let i = 0; i < arr.length; i++) {
-        let wallet = Keypair.fromSecretKey(new Uint8Array(bs58.decode(arr[i].privateKey)));
+        let wallet = Keypair.fromSecretKey(new Uint8Array(bs58.decode(arr[i])));
         try {
             const tx = await transferSol(wallet, recipient)
             console.log(`Transaction from address ${wallet.publicKey.toBase58()} completed successfully with tx: ${tx}`);
