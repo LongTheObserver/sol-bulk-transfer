@@ -10,4 +10,4 @@
 <h6>Step 3: Update the list of secret keys of wallets you want to drain in 'wallets.js'</h6>
 
 <h6>Step 4: Run the bot using this command: </h6>
-</code>node index.js</code>
+<code>node index.js</code>
